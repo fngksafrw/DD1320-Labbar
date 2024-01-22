@@ -1,0 +1,150 @@
+#Labb 1 Oscar Persson & Nils Kiefer
+class Pokemon:
+    def __init__(self,Name,Type1,Type2,Total,HP,Attack,Defense,SpAtk,SpDef,Speed,Generation,Legendary):
+        self.Name = Name
+        self.Type1 = Type1
+        self.Type2 = Type2
+        self.Total = Total
+        self.HP = HP
+        self.Attack = Attack
+        self.Defense = Defense
+        self.SpAtk = SpAtk
+        self.SpDef = SpDef
+        self.Speed = Speed
+        self.Generation = Generation
+        self.Legendary = Legendary
+
+    def __str__(self):
+        #Printar alla stats för pokemon
+        return "Name: " + str(self.Name) + ", Type 1: " + str(self.Type1)+", Type 2: " + str(self.Type2) +", Total: " + str(self.Total) + ", HP: "+ str(self.HP) + ", Attack: " + str(self.Attack)+ ", Defense: " + str(self.Defense) +", SpAtk: " +str(self.SpAtk)+ ", SpDef: "+str(self.SpDef)+", Speed: " + str(self.Speed)+", Generation: "+str(self.Generation)+", Legendary: "+str(self.Legendary)
+
+    def __lt__(self, other):
+        #Jämför attributer för pokemons
+        if self.Type1 < other.Type1:
+            return True
+        elif self.Type1 > other.Type1:
+            return False
+        
+        if self.Type2 < other.Type2:
+            return True
+        elif self.Type2 > other.Type2:
+            return False
+
+        if self.Total < other.Total:
+            return True
+        elif self.Total > other.Total:
+            return False
+        
+        if self.HP < other.HP:
+            return True
+        elif self.HP > other.HP:
+            return False
+        
+        if self.Attack < other.Attack:
+            return True
+        elif self.Attack > other.Attack:
+            return False
+        
+        if self.Defense < other.Defense:
+            return True
+        elif self.Defense > other.Defense:
+            return False
+        
+        if self.SpAtk < other.SpAtk:
+            return True
+        elif self.SpAtk > other.SpAtk:
+            return False
+        
+        if self.Speed < other.Speed:
+            return True
+        elif self.Speed > other.Speed:
+            return False
+        
+        if self.Generation < other.Generation:
+            return True
+        elif self.Generation > other.Generation:
+            return False
+        
+        if self.Legendary < other.Legendary:
+            return True
+        elif self.Legendary > other.Legendary:
+            return False
+    def __eq__(self, other):
+        #Hittar likheter för pokemons
+
+        if self.Type1 == other.Type1:
+            return True
+        if self.Type2 == other.Type2:
+            return True
+        
+        if self.Total == other.Total:
+            return True
+        
+        elif self.HP == other.HP:
+            return True
+
+        elif self.Attack == other.Attack:
+            return True
+
+        elif self.Defense == other.Defense:
+            return True
+
+        elif self.SpAtk == other.SpAtk:
+            return True
+
+        elif self.Speed == other.Speed:
+            return True
+
+        elif self.Generation == other.Generation:
+            return True
+        
+        elif self.Legendary == other.Legendary:
+            return True
+        else: return False
+    def getStat(self, stat):
+        #Hämtar specifik attribut för pokemon
+        if stat == "Name":
+            return self.Name
+        elif stat == "Type1":
+            return self.Type1
+        elif stat == "Type2":
+            return self.Type2
+        elif stat == "Total":
+            return self.Total
+        elif stat == "HP":
+            return self.HP
+        elif stat == "Attack":
+            return self.Attack
+        elif stat == "Defense":
+            return self.Defense
+        elif stat == "SpAtk":
+            return self.SpAtk
+        elif stat == "SpDef":
+            return self.SpDef
+        elif stat == "Speed":
+            return self.Speed
+        elif stat == "Generation":
+            return self.Generation
+        elif stat == "Legendary":
+            return self.Legendary
+        else:
+            return None
+
+def openFile(file):
+    #Öppnar textfilen och gör varje pokemon till ett objekt som läggs i en lista och returneras
+    pokemonList = []
+    f = open(file, 'r')
+    header = f.readline()
+    for line in f:
+        stats = line.strip().split(',')
+        stats = stats[1:]
+        pokemon = Pokemon(*stats)
+        pokemonList.append(pokemon)
+    return pokemonList
+
+def searchPokemon(pokemonList, pokemonName):
+    #Söker efter en pokemon i pokemonlistan efter namn
+    for pokemon in pokemonList:
+        if pokemon.Name.lower() == pokemonName.lower():
+            return pokemon
+    return None
